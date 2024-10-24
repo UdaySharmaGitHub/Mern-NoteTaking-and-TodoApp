@@ -1,18 +1,30 @@
-import { useState } from "react";
-export const NoteModal = ({ setShowModal ,addNewNotes}) => {
-    // useState for Title and Description
+import { useState,useEffect } from "react";
+export const NoteModal = ({ setShowModal, addNewNotes, currentNote,editExistNote }) => {
+  // useState for Title and Description
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-    // Form Handler
-  const noteSaveHandler =async(e)=>{
+  // Form Handler
+  const noteSaveHandler = async (e) => {
     e.preventDefault();
-    addNewNotes(title,description);
+    if(currentNote){
+      editExistNote(currentNote._id,title,description)
+    }else{
+    addNewNotes(title, description);
+    }
     setTitle("");
     setDescription("");
     setShowModal(false);
+  };
+
+// UseEffect;
+useEffect(() => {
+  if(currentNote) { 
+    setTitle(currentNote.title);
+    setDescription(currentNote.description);
     
   }
+}, [currentNote])
 
   return (
     <>
@@ -22,7 +34,9 @@ export const NoteModal = ({ setShowModal ,addNewNotes}) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-800 outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start text-white justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Add New Notes</h3>
+              <h3 className="text-3xl font-semibold">
+                {currentNote ? "Edit Note" : "Add New Notes"}
+              </h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -45,7 +59,7 @@ export const NoteModal = ({ setShowModal ,addNewNotes}) => {
                   <input
                     type="text"
                     id="notetitle"
-                    onChange={(e)=>setTitle(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Note Title"
@@ -61,7 +75,7 @@ export const NoteModal = ({ setShowModal ,addNewNotes}) => {
                 <textarea
                   id="message"
                   value={description}
-                  onChange={e=>setDescription(e.target.value)}
+                  onChange={(e) => setDescription(e.target.value)}
                   rows="4"
                   className="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Note Description..."
@@ -82,7 +96,7 @@ export const NoteModal = ({ setShowModal ,addNewNotes}) => {
                 type="button"
                 onClick={noteSaveHandler}
               >
-                Add Notes
+                {currentNote?"Update Note":"Add Note"}
               </button>
             </div>
           </div>
