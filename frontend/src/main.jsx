@@ -6,6 +6,8 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} f
 import { Signup } from './pages/Signup.jsx'
 import {Login} from './pages/Login.jsx'
 import {Home} from './pages/Home.jsx'
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/ReactToastify.css'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,12 +16,12 @@ const router = createBrowserRouter(
       <Route path='register' element={<Signup/>}/>
       <Route path='login' element={<Login/>}/>
     </Route>
-    
   )
 )
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ToastContainer/>
+    <RouterProvider router={router}  />
   </StrictMode>,
 )

@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { User } from "../models/User.models.js";
 import jwt from "jsonwebtoken";
 const router = Router();
+import { verifyUser } from "../middleware/VerifyUser.middleware.js";
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -39,7 +40,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    // console.log(email,password) // only use check that we get the response or not
+    console.log(email,password) // only use check that we get the response or not
     const user = await User.findOne({ email });
     // If user doesn't Exist
     if (!user) {
@@ -50,7 +51,7 @@ router.post("/login", async (req, res) => {
 
     // Check the password using JWT
     const checkPassword = await bcrypt.compare(password, user.password);
-    console.log(checkPassword); 
+    console.log("Password Status "+checkPassword); 
     
     //  if Password doesn't match
     if (!checkPassword) {
@@ -66,7 +67,7 @@ router.post("/login", async (req, res) => {
 
     return res
       .status(200)
-      .json({ success: true,token ,user:{name:user.name}, message: "User Logged in Successfully" });
+      .json({ success: true,token ,user:{name:user.name,userId:user.id}, message: "User Logged in Successfully" });
   } catch (error) {
     console.log(error);
     return res
@@ -75,4 +76,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get('/verifyUser',verifyUser,async(req,res)=>{
+  return res.status(200).json({success:true})
+})
 export default router;

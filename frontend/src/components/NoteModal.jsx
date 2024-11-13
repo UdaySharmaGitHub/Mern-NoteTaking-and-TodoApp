@@ -38,10 +38,10 @@ useEffect(() => {
                 {currentNote ? "Edit Note" : "Add New Notes"}
               </h3>
               <button
-                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                className="p-1 ml-auto bg-transparent border-0 flex justify-center items-center  text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
               >
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                <span className="bg-transparent text-white  block outline-none focus:outline-none">
                   ×
                 </span>
               </button>
@@ -77,6 +77,7 @@ useEffect(() => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows="4"
+                  required
                   className="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Note Description..."
                 ></textarea>

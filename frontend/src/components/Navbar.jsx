@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../context/ContextProvider.jsx";
-export const Navbar = () => {
-  const { user } = useAuthContext();
+export const Navbar = ({setQuery}) => {
+  // handleLogOut
+
+  const { user,logout } = useAuthContext();
   console.log(user)
   return (
     <nav className="bg-white dark:bg-gray-900 w-full z-20  border-b border-gray-200 dark:border-gray-600">
@@ -15,7 +17,6 @@ export const Navbar = () => {
           </span>
         </Link>
         <div className="flex justify-center items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <p className="text-xl font-bold mr-4">{user}</p>
 
           {!user ? (
             <>
@@ -37,14 +38,18 @@ export const Navbar = () => {
               </Link>
             </>
           ) : (
+            <>
+            <span className="text-xl font-bold mr-4">{user}</span>
             <Link to="/login">
               <button
                 type="button"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ml-4 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              onClick={logout}
               >
                 Logout
               </button>
             </Link>
+            </>
           )}
 
           <button
@@ -76,7 +81,7 @@ export const Navbar = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-sticky"
         >
-          <form className="mx-auto">
+          <div className="mx-auto">
             <div className="relative">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
@@ -101,15 +106,11 @@ export const Navbar = () => {
                 className="block w-[300px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search Mockups, Logos..."
                 required
+                onChange={(e)=> setQuery(e.target.value)}
               />
-              <button
-                type="submit"
-                className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Search
-              </button>
+             
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </nav>

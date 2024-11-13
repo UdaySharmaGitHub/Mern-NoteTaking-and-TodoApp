@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 
 export const Signup = () => {
   const [name, setName] = useState("");
@@ -14,7 +16,9 @@ const handleSubmit = async(e)=>{
     try {
         const response = await axios.post("http://localhost:3000/api/v1/auth/register",{name,email,password})
         console.log(response); //axios
-        if(response.data.success) navigate('/login');
+        if(response.data.success){ navigate('/login');
+          toast.success("Sign In Successfully")
+        }
     } catch (error) {
         console.error(error);
     }

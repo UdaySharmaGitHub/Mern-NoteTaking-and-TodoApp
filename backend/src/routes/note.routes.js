@@ -4,9 +4,10 @@ import {Router} from 'express'
 const router = Router();
 
 // to fetch the data from the notes;
-router.get("/",async(req,res)=>{
+router.get("/",verifyUser,async(req,res)=>{
     try{
-        const notes  = await Note.find();
+        console.log(req.user.id)
+        const notes  = await Note.find({userId : req.user.id});
         return res.status(200).json({success:true,notes,message:"Successfully get the data"});
     }catch(error){
         return res.status(500).json({success:false,message:"Something went Wrong"})

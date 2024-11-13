@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/ContextProvider";
+import { toast } from 'react-toastify';
 
 export const Login = () => {
   const [password, setPassword] = useState("");
@@ -19,7 +20,9 @@ const handleSubmit = async(e)=>{
         if(response.data.success){
           login(response.data.user.name)
           localStorage.setItem("token",response.data.token)
-          navigate('/');}
+          navigate('/');
+          toast.success("Logged In Successfully")
+        }
     } catch (error) {
         console.error(error);
     }
