@@ -25,7 +25,7 @@ const ContextProvider = ({children}) => {
           if(res.data.success){
             setUser(res.data.user)
           }
-          else setUser(null);
+          else{ setUser(null);}
         } catch (error) {
           console.log(error)
         }

@@ -76,7 +76,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get('/verifyUser',verifyUser,async(req,res)=>{
-  return res.status(200).json({success:true})
+router.get('/verify',verifyUser,async(req,res)=>{
+  // console.log("verify "+req.user)
+  return res.status(200).json({success:true ,user:req.user})
 })
 export default router;

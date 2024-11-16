@@ -8,11 +8,13 @@ import {Login} from './pages/Login.jsx'
 import {Home} from './pages/Home.jsx'
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/ReactToastify.css'
+import { NoteApp } from './pages/NoteApp.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element = {<App/>}>
-      <Route path='' element={<Home/>}/>
+      <Route path='' element={<NoteApp/>}/>
+      <Route path='home' element={<Home/>}/>
       <Route path='register' element={<Signup/>}/>
       <Route path='login' element={<Login/>}/>
     </Route>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import {Navbar} from '../components/Navbar'
 
 
 export const Signup = () => {
@@ -25,6 +26,8 @@ const handleSubmit = async(e)=>{
 }
 
   return (
+    <>
+        <Navbar/>
     <section className="bg-gray-50 dark:bg-gray-900 h-screen">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:pt-10">
         <a
@@ -136,5 +139,6 @@ const handleSubmit = async(e)=>{
         </div>
       </div>
     </section>
+    </>
   );
 };

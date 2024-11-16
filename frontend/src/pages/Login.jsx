@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/ContextProvider";
 import { toast } from 'react-toastify';
+import {Navbar} from '../components/Navbar'
 
 export const Login = () => {
   const [password, setPassword] = useState("");
@@ -18,9 +19,9 @@ const handleSubmit = async(e)=>{
         const response = await axios.post("http://localhost:3000/api/v1/auth/login",{email,password})
         console.log(response); //axios
         if(response.data.success){
-          login(response.data.user.name)
+          login(response.data.user)
           localStorage.setItem("token",response.data.token)
-          navigate('/');
+          navigate('/home');
           toast.success("Logged In Successfully")
         }
     } catch (error) {
@@ -29,6 +30,8 @@ const handleSubmit = async(e)=>{
 }
 
   return (
+    <>
+    <Navbar/>
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-4 mx-auto lg:pt-10">
         <a
@@ -122,5 +125,6 @@ const handleSubmit = async(e)=>{
         </div>
       </div>
     </section>
+    </>
   );
 };

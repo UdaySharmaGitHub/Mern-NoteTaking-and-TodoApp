@@ -4,16 +4,16 @@ export const Navbar = ({setQuery}) => {
   // handleLogOut
 
   const { user,logout } = useAuthContext();
-  console.log(user)
+  // console.log(user)
   return (
     <nav className="bg-white dark:bg-gray-900 w-full z-20  border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
-          href="/"
+          to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            NoteTakeApp
           </span>
         </Link>
         <div className="flex justify-center items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -39,7 +39,7 @@ export const Navbar = ({setQuery}) => {
             </>
           ) : (
             <>
-            <span className="text-xl font-bold mr-4">{user}</span>
+            <span className="text-xl font-bold mr-4">{user.name}</span>
             <Link to="/login">
               <button
                 type="button"
